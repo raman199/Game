@@ -60,10 +60,9 @@
 		04FB362023F26734009A5D2B /* aGame */ = {
 			isa = PBXGroup;
 			children = (
+				04FB363B23F4CAF7009A5D2B /* Scenes */,
 				04FB362123F26734009A5D2B /* AppDelegate.swift */,
-				04FB362323F26734009A5D2B /* GameScene.sks */,
 				04FB362523F26734009A5D2B /* Actions.sks */,
-				04FB362723F26734009A5D2B /* GameScene.swift */,
 				04FB362923F26734009A5D2B /* GameViewController.swift */,
 				04FB362B23F26734009A5D2B /* Main.storyboard */,
 				04FB362E23F26736009A5D2B /* Assets.xcassets */,
@@ -71,6 +70,15 @@
 				04FB363323F26736009A5D2B /* Info.plist */,
 			);
 			path = aGame;
+			sourceTree = "<group>";
+		};
+		04FB363B23F4CAF7009A5D2B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				04FB362323F26734009A5D2B /* GameScene.sks */,
+				04FB362723F26734009A5D2B /* GameScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
