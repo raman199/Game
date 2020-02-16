@@ -1,3 +1,9 @@
+//file name: CollisionManager.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: Collision manager
+// Revision History:
 
 import SpriteKit
 import GameplayKit
@@ -33,12 +39,7 @@ class CollisionManager
                     gameViewController?.updateScoreLabel()
                     scene.run(SKAction.playSoundFileNamed("yay", waitForCompletion: false))
                     break
-//                case "cloud":
-//                    
-//                    ScoreManager.Lives -= 1
-//                    gameViewController?.updateLivesLabel()
-//                    scene.run(SKAction.playSoundFileNamed("thunder", waitForCompletion: false))
-//                    break
+
                 default:
                     break
                 }

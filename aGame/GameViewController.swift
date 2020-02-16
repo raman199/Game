@@ -1,7 +1,9 @@
-//
-//  GameViewController.swift
-//
-//
+//file name: GameViewController.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: View controller of game
+// Revision History:
 
 import UIKit
 import SpriteKit

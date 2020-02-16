@@ -1,3 +1,9 @@
+//file name: StartScene.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: Start Scene
+// Revision History:
 
 import UIKit
 import AVFoundation
@@ -7,11 +13,9 @@ import GameplayKit
 
 class StartScene: SKScene {
     
-    //var sceneState: SceneState?
     
     var backgroundSprite1: background?
     var backgroundSprite2: background?
-    //var config: Config?
     
 
     
@@ -21,11 +25,10 @@ class StartScene: SKScene {
         screenWidth = frame.width
         screenHeight = frame.height
         
-        //self.sceneState = .START
-        //self.config?.sceneState = .START
+       
         self.name = "START"
         
-        // add ocean
+        // add background
         self.backgroundSprite1 = background()
         self.backgroundSprite1?.position = CGPoint(x: 0, y: 1864.67)
         self.addChild(backgroundSprite1!)

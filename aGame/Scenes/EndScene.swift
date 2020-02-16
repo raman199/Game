@@ -1,3 +1,9 @@
+//file name: EndScene.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: End Scene
+// Revision History:
 
 import UIKit
 import AVFoundation
@@ -18,7 +24,7 @@ class EndScene: SKScene {
 
         self.name = "END"
         
-        // add ocean
+        // add background
         self.backgroundSprite1 = background()
         self.backgroundSprite1?.position = CGPoint(x: 0, y: 1864.67)
         self.addChild(backgroundSprite1!)

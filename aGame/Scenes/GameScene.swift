@@ -1,4 +1,9 @@
-
+//file name: GameScene.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: Game Scene
+// Revision History:
 import UIKit
 import AVFoundation
 import SpriteKit
@@ -17,9 +22,7 @@ class GameScene: SKScene {
     var backgroundSprite2: background?
     var humanSprite: human?
     var flowerSprite: flower?
-   // var cloudSprites: [Cloud] = []
-    
-    //var config: Config?
+  
     
     
     override func didMove(to view: SKView)
@@ -27,8 +30,7 @@ class GameScene: SKScene {
         screenWidth = frame.width
         screenHeight = frame.height
         
-        //self.sceneState = .GAME
-        //self.config?.sceneState = .GAME
+      
         self.name = "GAME"
         
         // add background
@@ -40,39 +42,18 @@ class GameScene: SKScene {
         self.backgroundSprite2?.position = CGPoint(x: 0, y: 177)
         self.addChild(backgroundSprite2!)
         
-        // add plane
+        // add human
         self.humanSprite = human()
         self.humanSprite?.position = CGPoint(x: 0, y: -575)
         self.addChild(humanSprite!)
         
-        // add island
+        // add flower
         self.flowerSprite = flower()
         self.addChild(flowerSprite!)
         
-        // add clouds
-        for index in 0...3
-        {
-           // let cloud: Cloud = Cloud()
-          //  cloudSprites.append(cloud)
-            //self.addChild(cloudSprites[index])
-        }
+      
         
-     //   let engineSound = SKAudioNode(fileNamed: "engine.mp3")
-      //  self.addChild(engineSound)
-     //   engineSound.autoplayLooped = true
-        
-        // preload sounds
-//        do {
-//            let sounds:[String] = ["thunder", "yay"]
-//            for sound in sounds
-//            {
-//                let path: String = Bundle.main.path(forResource: sound, ofType: "mp3")!
-//                let url: URL = URL(fileURLWithPath: path)
-//                let player: AVAudioPlayer = try AVAudioPlayer(contentsOf: url)
-//                player.prepareToPlay()
-//            }
-//        } catch {
-//        }
+   
         
     }
     
@@ -122,11 +103,7 @@ class GameScene: SKScene {
         
         CollisionManager.squaredRadiusCheck(scene: self, object1: humanSprite!, object2: flowerSprite!)
         
-//        for cloud in cloudSprites
-//        {
-//            cloud.Update()
-//            CollisionManager.squaredRadiusCheck(scene: self, object1: planeSprite!, object2: cloud)
-//        }
+
         
         if(ScoreManager.Lives < 1)
         {

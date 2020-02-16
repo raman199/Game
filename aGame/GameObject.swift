@@ -1,3 +1,10 @@
+//file name: GameObject.swift,
+//Author’s name: Ramandeep Kaur,
+//Student Number: 301088232,
+//Date last Modified: 16 Feb 2019,
+//Program description: Game Object
+// Revision History:
+
 import SpriteKit
 import GameplayKit
 
