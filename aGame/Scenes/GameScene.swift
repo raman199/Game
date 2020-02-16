@@ -1,89 +1,137 @@
-//
-//  GameScene.swift
-//  aGame
-//
-//  Created by mac on 2020-02-10.
-//  Copyright © 2020 Centennial College. All rights reserved.
-//
 
+import UIKit
+import AVFoundation
 import SpriteKit
 import GameplayKit
 
+let screenSize = UIScreen.main.bounds
+var screenWidth: CGFloat?
+var screenHeight: CGFloat?
+
+
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    var gameManager: GameManager?
     
-    override func didMove(to view: SKView) {
+    var backgroundSprite1: background?
+    var backgroundSprite2: background?
+    var humanSprite: human?
+    var flowerSprite: flower?
+   // var cloudSprites: [Cloud] = []
+    
+    //var config: Config?
+    
+    
+    override func didMove(to view: SKView)
+    {
+        screenWidth = frame.width
+        screenHeight = frame.height
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        //self.sceneState = .GAME
+        //self.config?.sceneState = .GAME
+        self.name = "GAME"
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        // add background
+        self.backgroundSprite1 = background()
+        self.backgroundSprite1?.position = CGPoint(x: 0, y: 1864.67)
+        self.addChild(backgroundSprite1!)
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
-    }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+        self.backgroundSprite2 = background()
+        self.backgroundSprite2?.position = CGPoint(x: 0, y: 177)
+        self.addChild(backgroundSprite2!)
+        
+        // add plane
+        self.humanSprite = human()
+        self.humanSprite?.position = CGPoint(x: 0, y: -575)
+        self.addChild(humanSprite!)
+        
+        // add island
+        self.flowerSprite = flower()
+        self.addChild(flowerSprite!)
+        
+        // add clouds
+        for index in 0...3
+        {
+           // let cloud: Cloud = Cloud()
+          //  cloudSprites.append(cloud)
+            //self.addChild(cloudSprites[index])
         }
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+     //   let engineSound = SKAudioNode(fileNamed: "engine.mp3")
+      //  self.addChild(engineSound)
+     //   engineSound.autoplayLooped = true
+        
+        // preload sounds
+//        do {
+//            let sounds:[String] = ["thunder", "yay"]
+//            for sound in sounds
+//            {
+//                let path: String = Bundle.main.path(forResource: sound, ofType: "mp3")!
+//                let url: URL = URL(fileURLWithPath: path)
+//                let player: AVAudioPlayer = try AVAudioPlayer(contentsOf: url)
+//                player.prepareToPlay()
+//            }
+//        } catch {
+//        }
+        
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+    func touchDown(atPoint pos : CGPoint)
+    {
+        self.humanSprite?.TouchMove(newPos: CGPoint(x: pos.x, y: -575))
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    func touchMoved(toPoint pos : CGPoint)
+    {
+        self.humanSprite?.TouchMove(newPos: CGPoint(x: pos.x, y: -575))
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    func touchUp(atPoint pos : CGPoint)
+    {
+        self.humanSprite?.TouchMove(newPos: CGPoint(x: pos.x, y: -575))
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        for t in touches { self.touchDown(atPoint: t.location(in: self))}
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        for t in touches { self.touchMoved(toPoint: t.location(in: self))}
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        for t in touches { self.touchUp(atPoint: t.location(in: self))}
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        for t in touches { self.touchUp(atPoint: t.location(in: self))}
     }
     
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+    override func update(_ currentTime: TimeInterval)
+    {
+        self.backgroundSprite1?.Update()
+        self.backgroundSprite2?.Update()
+        
+        self.humanSprite?.Update()
+        self.flowerSprite?.Update()
+        
+        CollisionManager.squaredRadiusCheck(scene: self, object1: humanSprite!, object2: flowerSprite!)
+        
+//        for cloud in cloudSprites
+//        {
+//            cloud.Update()
+//            CollisionManager.squaredRadiusCheck(scene: self, object1: planeSprite!, object2: cloud)
+//        }
+        
+        if(ScoreManager.Lives < 1)
+        {
+            self.gameManager?.PresentEndScene()
+        }
     }
 }
+

@@ -1,6 +1,9 @@
 //
 //  GameViewController.swift
+//  MAPD724-W2020-Lesson2
 //
+//  Created by Tom Tsiliopoulos on 2020-01-15.
+//  Copyright © 2020 CentennialCollege. All rights reserved.
 //
 
 import UIKit
@@ -9,19 +12,15 @@ import GameplayKit
 
 class GameViewController: UIViewController, GameManager {
     
-     // button outlets
-    @IBOutlet weak var BackButtonOutlet: UIButton!
+    
+    // button outlets
     @IBOutlet weak var StartButtonOutlet: UIButton!
-   
+    @IBOutlet weak var BackButtonOutlet: UIButton!
     
     // label outlets
-      
+    @IBOutlet weak var StartLabel: UILabel!
+    @IBOutlet weak var LivesLabel: UILabel!
     @IBOutlet weak var ScoreLabel: UILabel!
-    
-    @IBOutlet weak var StartLabel: UIImageView!
-   
-   // @IBOutlet weak var LivesLabel: UILabel!
-    
     
     var currentScene: SKScene?
     
@@ -30,6 +29,7 @@ class GameViewController: UIViewController, GameManager {
         super.viewDidLoad()
         
         BackButtonOutlet.isHidden = true
+        LivesLabel.isHidden = true
         ScoreLabel.isHidden = true
         
         CollisionManager.gameViewController = self
@@ -58,10 +58,10 @@ class GameViewController: UIViewController, GameManager {
         ScoreLabel.text  = "Score: \(ScoreManager.Score)"
     }
     
-   // func updateLivesLabel() -> Void
-   // {
-      //  LivesLabel.text = "Lives: \(ScoreManager.Lives)"
-   // }
+    func updateLivesLabel() -> Void
+    {
+        LivesLabel.text = "Lives: \(ScoreManager.Lives)"
+    }
     
     
     func SetScene(sceneName: String)
@@ -90,14 +90,14 @@ class GameViewController: UIViewController, GameManager {
     
     func PresentStartScene() {
         StartButtonOutlet.isHidden = false
-       // LivesLabel.isHidden = true
+        LivesLabel.isHidden = true
         ScoreLabel.isHidden = true
         StartLabel.isHidden = false
     }
     
     func PresentEndScene() {
         BackButtonOutlet.isHidden = false
-       // LivesLabel.isHidden = true
+        LivesLabel.isHidden = true
         ScoreLabel.isHidden = true
         SetScene(sceneName: "EndScene")
     }
@@ -107,9 +107,9 @@ class GameViewController: UIViewController, GameManager {
     {
         StartButtonOutlet.isHidden = true
         StartLabel.isHidden = true
-       // LivesLabel.isHidden = false
+        LivesLabel.isHidden = false
         ScoreLabel.isHidden = false
-       // updateLivesLabel()
+        updateLivesLabel()
         updateScoreLabel()
         SetScene(sceneName: "GameScene")
         
@@ -118,15 +118,14 @@ class GameViewController: UIViewController, GameManager {
     @IBAction func BackButton_Press(_ sender: Any)
     {
         BackButtonOutlet.isHidden = true
-       // LivesLabel.isHidden = false
+        LivesLabel.isHidden = false
         ScoreLabel.isHidden = false
         ScoreManager.Score = 0
         ScoreManager.Lives = 5
-       // updateLivesLabel()
+        updateLivesLabel()
         updateScoreLabel()
         SetScene(sceneName: "GameScene")
     }
     
     
 }
-
